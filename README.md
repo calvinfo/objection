@@ -1,4 +1,4 @@
 objection
 =========
 
-An object validator for node
+An object validator for node -- UNDER DEVELOPMENT! Give me a few weeks.
