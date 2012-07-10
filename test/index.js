@@ -111,6 +111,22 @@ describe('Validator Tests', function () {
             });
 
             result.valid.should.be.false;
+
+            result = objection.validate('Post', {
+                author : user,
+                text   : 'hello world',
+                votes  : 200
+            });
+
+            result.valid.should.be.true;
+
+            result = objection.validate('Post', {
+                author : badUser,
+                text   : 'hello world',
+                votes  : 200
+            });
+
+            result.valid.should.be.false;
         });
 
 
@@ -119,7 +135,7 @@ describe('Validator Tests', function () {
             objection.map('TestObjection', function (val) {
                 return val === 'objection'; });
 
-            objection.map('NestFunc', {
+            var validator = objection.map('NestFunc', {
 
                 name : 'string',
                 val  : 'TestObjection'
@@ -130,8 +146,8 @@ describe('Validator Tests', function () {
 
             result.valid.should.be.true;
 
-            result = objection.validate('NestFunc', { name : 'calvin',
-                                                      val  : 'objection?!' });
+            result = validator.validate({ name : 'calvin',
+                                          val  : 'objection?!' });
 
             result.valid.should.be.false;
 
