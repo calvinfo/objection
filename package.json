@@ -1,6 +1,6 @@
 {
     "name": "objection"
-  , "version": "0.0.4"
+  , "version": "0.0.5"
   , "description": "A node object validator"
   , "keywords": ["validation", "object", "objection", "validator"]
   , "author": "Calvin French-Owen <calvin@segment.io>"
