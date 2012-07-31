@@ -153,6 +153,26 @@ describe('Validator Tests', function () {
 
         });
 
+        it('should accept required arguments', function () {
+
+            objection.map('Required', {
+
+                email : { required : true, type : 'str' },
+                name  : 'str'
+
+            });
+
+            var result = objection.validate('Required', { email : 'hello' });
+            result.valid.should.be.true;
+
+            result = objection.validate('Required', { email : 'hello',
+                                                      name  : 'dog' });
+            result.valid.should.be.true;
+
+            result = objection.validate('Required', { name : 'dog' });
+            result.valid.should.be.false;
+        });
+
     });
 
 
