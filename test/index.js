@@ -175,6 +175,61 @@ describe('Validator Tests', function () {
 
     });
 
+    describe('#validate() - arrays', function () {
+
+        it('should accept arrays', function () {
+
+            objection.map('BasicArrays', {
+
+                steps : []
+            });
+
+            var result = objection.validate('BasicArrays', { steps : '4' });
+            result.valid.should.be.false;
+
+            result = objection.validate('BasicArrays', { steps : [1,2,'a'] });
+            result.valid.should.be.true;
+
+        });
 
 
+        it('should accept arrays with types', function () {
+
+            objection.map('StringArray', {
+
+                array : ['string']
+            });
+
+            var result = objection.validate('StringArray', { array : '4' });
+            result.valid.should.be.false;
+
+            result = objection.validate('StringArray', { array : ['b', 2,'a'] });
+            result.valid.should.be.false;
+
+            result = objection.validate('StringArray', { array : ['b','c','a'] });
+            result.valid.should.be.true;
+
+        });
+
+        it('should accept arrays in object form', function () {
+
+            objection.map('StringArray2', {
+
+                array : { type : ['string'], required : true }
+            });
+
+            var result = objection.validate('StringArray2', { array : 4 });
+            result.valid.should.be.false;
+
+            result = objection.validate('StringArray2', { array : ['b', 2,'a'] });
+            result.valid.should.be.false;
+
+            result = objection.validate('StringArray2', { array : ['b','c','a'] });
+            result.valid.should.be.true;
+
+            result = objection.validate('StringArray2', {});
+            result.valid.should.be.false;
+
+        });
+    });
 });
